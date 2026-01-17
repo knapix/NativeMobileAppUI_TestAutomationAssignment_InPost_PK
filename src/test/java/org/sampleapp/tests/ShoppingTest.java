@@ -1,27 +1,28 @@
 package org.sampleapp.tests;
 
-import org.sampleapp.pages.CartPage;
-import org.sampleapp.pages.CheckoutPage;
-import org.sampleapp.pages.HomePage;
-import org.sampleapp.pages.OrderConfirmationPage;
+import org.sampleapp.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ShoppingTest extends org.sampleapp.base.TestBase {
+public class ShoppingTest extends org.sampleapp.tests.TestBase {
 
     @Test
     public void completePurchaseFlow() {
+        LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         CartPage cartPage = new CartPage(driver);
         CheckoutPage checkoutPage = new CheckoutPage(driver);
         OrderConfirmationPage orderPage = new OrderConfirmationPage(driver);
 
+        // Login
+        loginPage.loginAsStandardUser();
+
         // Dodaj produkt do koszyka
+        homePage.selectFirstProduct();
         homePage.clickCartButton();
 
-        // Przejdź do koszyka i sprawdź sumę
+        // Przejdź do koszyka
         cartPage.clickCheckoutButton();
-        //Assert.assertTrue(cartPage.getTotalText().contains("Total"));
 
         // Wypełnij formularz checkout
         checkoutPage.enterName("Jan Kowalski");
@@ -29,8 +30,7 @@ public class ShoppingTest extends org.sampleapp.base.TestBase {
         checkoutPage.clickPlaceOrder();
 
         // Sprawdź ekran potwierdzenia
-//        String confirmation = orderPage.getConfirmationText();
-//        Assert.assertTrue(confirmation.contains("Thank you"));
-//        orderPage.goHome();
+        String confirmation = orderPage.getConfirmationMessage().getText();
+        Assert.assertTrue(confirmation.toLowerCase().contains("thank you"));
     }
 }

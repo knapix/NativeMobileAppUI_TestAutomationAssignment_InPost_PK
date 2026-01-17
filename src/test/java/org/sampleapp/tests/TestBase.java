@@ -1,4 +1,4 @@
-package org.sampleapp.base;
+package org.sampleapp.tests;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -22,7 +22,10 @@ public class TestBase {
         caps.setCapability("automationName", "UiAutomator2");
         caps.setCapability("app", System.getProperty("user.dir") + "/app/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk"); // ścieżka do APK
        // caps.setCapability("fullReset", false);
-        caps.setCapability("noReset", true);
+        caps.setCapability("appPackage", "com.swaglabsmobileapp");
+        caps.setCapability("appActivity", "com.swaglabsmobileapp.MainActivity");
+        // caps.setCapability("noReset", true);
+        caps.setCapability("fullReset", false);
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), caps);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

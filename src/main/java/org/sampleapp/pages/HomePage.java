@@ -1,24 +1,25 @@
 package org.sampleapp.pages;
 
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
 
     private AndroidDriver driver;
 
-    // PageFactory @FindBy
-    @FindBy(id = "com.sampleapp:id/cart_button")
+    // PageFactory @AndroidFindBy
+    @AndroidFindBy(accessibility = "test-Cart")
     private WebElement cartButton;
 
-    @FindBy(id = "com.sampleapp:id/product_1")
-    private WebElement firstProduct;
+    @AndroidFindBy(accessibility = "test-ADD TO CART")
+    private WebElement addToCartButton;
 
     public HomePage(AndroidDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
     public void clickCartButton() {
@@ -26,6 +27,6 @@ public class HomePage {
     }
 
     public void selectFirstProduct() {
-        firstProduct.click();
+        addToCartButton.click();
     }
 }

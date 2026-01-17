@@ -1,10 +1,6 @@
 package org.sampleapp.tests;
 
-import org.sampleapp.base.TestBase;
-import org.sampleapp.pages.CartPage;
-import org.sampleapp.pages.CheckoutPage;
-import org.sampleapp.pages.HomePage;
-import org.sampleapp.pages.OrderConfirmationPage;
+import org.sampleapp.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,9 +10,14 @@ public class PurchaseFlowTest extends TestBase {
     public void testPurchaseFlow() {
 
         HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
         CartPage cartPage = new CartPage(driver);
         CheckoutPage checkoutPage = new CheckoutPage(driver);
         OrderConfirmationPage orderConfirmationPage = new OrderConfirmationPage(driver);
+
+        //login
+        loginPage.loginAsStandardUser();
+
 
         // 1️⃣ Dodaj produkt do koszyka
         homePage.selectFirstProduct();
@@ -32,6 +33,6 @@ public class PurchaseFlowTest extends TestBase {
 
         // 4️⃣ Sprawdź potwierdzenie
         String confirmationText = orderConfirmationPage.getConfirmationMessage().getText();
-        Assert.assertTrue(confirmationText.contains("Thank you"), "Potwierdzenie zamówienia nie zawiera expected text!");
+        Assert.assertTrue(confirmationText.toLowerCase().contains("thank you"), "Potwierdzenie zamówienia nie zawiera expected text!");
     }
 }
