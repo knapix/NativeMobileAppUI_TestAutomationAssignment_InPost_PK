@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
 
-    private AndroidDriver driver;
     @AndroidFindBy(accessibility = "test-Cart")
     private WebElement cartButton;
 
@@ -16,7 +15,6 @@ public class HomePage {
     private WebElement addToCartButton;
 
     public HomePage(AndroidDriver driver) {
-        this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 

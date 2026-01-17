@@ -8,8 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 
-    private AndroidDriver driver;
-
     @AndroidFindBy(accessibility = "test-standard_user")
     private WebElement standardUserButton;
 
@@ -17,7 +15,6 @@ public class LoginPage {
     private WebElement loginButton;
 
     public LoginPage(AndroidDriver driver) {
-        this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
