@@ -14,23 +14,23 @@ public class ShoppingTest extends org.sampleapp.tests.TestBase {
         CheckoutPage checkoutPage = new CheckoutPage(driver);
         OrderConfirmationPage orderPage = new OrderConfirmationPage(driver);
 
-        // Login
+        // Step 1: Login
         loginPage.loginAsStandardUser();
 
-        // Dodaj produkt do koszyka
+        // Step 2: Add product to cart and navigate to cart
         homePage.selectFirstProduct();
         homePage.clickCartButton();
 
-        // Przejdź do koszyka
+        // Step 3: Proceed to checkout
         cartPage.clickCheckoutButton();
 
-        // Wypełnij formularz checkout
+        // Step 4: Fill in checkout details and complete the order
         checkoutPage.enterName("Jan Kowalski");
         checkoutPage.enterAddress("ul. Przykładowa 12, 00-001 Warszawa");
         checkoutPage.clickPlaceOrder();
 
-        // Sprawdź ekran potwierdzenia
+        // Step 5: Verify the order confirmation
         String confirmation = orderPage.getConfirmationMessage().getText();
-        Assert.assertTrue(confirmation.toLowerCase().contains("thank you"));
+        Assert.assertTrue(confirmation.toLowerCase().contains("thank you"), "Order confirmation message missing expected text");
     }
 }

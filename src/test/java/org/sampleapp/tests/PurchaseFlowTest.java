@@ -15,24 +15,23 @@ public class PurchaseFlowTest extends TestBase {
         CheckoutPage checkoutPage = new CheckoutPage(driver);
         OrderConfirmationPage orderConfirmationPage = new OrderConfirmationPage(driver);
 
-        //login
+        // Step 1: Login to the application
         loginPage.loginAsStandardUser();
 
-
-        // 1️⃣ Dodaj produkt do koszyka
+        // Step 2: Add the first product to the cart
         homePage.selectFirstProduct();
 
-        // 2️⃣ Otwórz koszyk
+        // Step 3: Open the cart and proceed to checkout
         homePage.clickCartButton();
         cartPage.clickCheckoutButton();
 
-        // 3️⃣ Wypełnij dane
+        // Step 4: Fill in shipping details and place the order
         checkoutPage.enterName("Jan Kowalski");
         checkoutPage.enterAddress("ul. Przykładowa 1, 00-001 Warszawa");
         checkoutPage.clickPlaceOrder();
 
-        // 4️⃣ Sprawdź potwierdzenie
+        // Step 5: Verify the order confirmation message
         String confirmationText = orderConfirmationPage.getConfirmationMessage().getText();
-        Assert.assertTrue(confirmationText.toLowerCase().contains("thank you"), "Potwierdzenie zamówienia nie zawiera expected text!");
+        Assert.assertTrue(confirmationText.toLowerCase().contains("thank you"), "Order confirmation message does not contain expected text!");
     }
 }

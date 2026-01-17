@@ -22,10 +22,10 @@ public class LoginPage {
     }
 
     public void loginAsStandardUser() {
-        // Klikamy przycisk gotowego standard_user
+        // Select the standard_user profile
         standardUserButton.click();
 
-        // Następnie klikamy login
+        // Perform login
         loginButton.click();
     }
 }

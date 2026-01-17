@@ -40,13 +40,13 @@ public class CheckoutPage {
     }
 
     public void enterAddress(String address) {
-        // Zip code is used here as a placeholder for address info required by the app
+        // ZIP code is used here as a placeholder for the address info required by the app
         zipCodeField.sendKeys("00-001");
     }
 
     public void clickPlaceOrder() {
         continueButton.click();
-        // Scroll to FINISH button using UiScrollable
+        // Scroll to the FINISH button using UiScrollable to ensure it's visible before clicking
         driver.findElement(AppiumBy.androidUIAutomator(
                 "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView("
                         + "new UiSelector().description(\"test-FINISH\"));"));

@@ -9,8 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 public class HomePage {
 
     private AndroidDriver driver;
-
-    // PageFactory @AndroidFindBy
     @AndroidFindBy(accessibility = "test-Cart")
     private WebElement cartButton;
 

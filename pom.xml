@@ -31,19 +31,26 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- Selenium (Appium wymaga) -->
+            <!-- Selenium (Appium required) -->
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
                 <version>4.12.1</version>
             </dependency>
 
-            <!-- Dotenv (opcjonalnie do zarządzania konfiguracją) -->
+            <!-- Dotenv (optional to manage config) -->
             <dependency>
                 <groupId>io.github.cdimascio</groupId>
                 <artifactId>java-dotenv</artifactId>
                 <version>5.2.2</version>
             </dependency>
+
+        <!-- slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.17</version> <!-- Use latest 2026 version -->
+        </dependency>
 
     </dependencies>
 
