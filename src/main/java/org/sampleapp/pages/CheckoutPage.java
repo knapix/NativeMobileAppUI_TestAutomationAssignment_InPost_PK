@@ -2,14 +2,10 @@ package org.sampleapp.pages;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
-public class CheckoutPage {
-
-    private AndroidDriver driver;
+public class CheckoutPage extends BasePage {
 
     @AndroidFindBy(accessibility = "test-First Name")
     private WebElement firstNameField;
@@ -26,17 +22,31 @@ public class CheckoutPage {
     @AndroidFindBy(accessibility = "test-FINISH")
     private WebElement finishButton;
 
-    public CheckoutPage(AndroidDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Description']/android.widget.TextView[@text='CHECKOUT: OVERVIEW'] | //android.widget.TextView[@text='CHECKOUT: OVERVIEW']")
+    private WebElement overviewHeader;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Item']//android.view.ViewGroup[@content-desc='test-Description']/android.widget.TextView")
+    private WebElement productTitle;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text, 'Payment Information')]/following-sibling::android.widget.TextView[1] | //android.widget.TextView[contains(@text, 'PAYMENT INFORMATION')]/following-sibling::android.widget.TextView[1]")
+    private WebElement paymentInfo;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text, 'Shipping Information')]/following-sibling::android.widget.TextView[1] | //android.widget.TextView[contains(@text, 'SHIPPING INFORMATION')]/following-sibling::android.widget.TextView[1]")
+    private WebElement shippingInfo;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text, 'Total:')]")
+    private WebElement totalPrice;
+
+    public CheckoutPage(AppiumDriver driver) {
+        super(driver);
     }
 
-    public void enterName(String name) {
-        String[] names = name.split(" ");
-        firstNameField.sendKeys(names[0]);
-        if (names.length > 1) {
-            lastNameField.sendKeys(names[1]);
-        }
+    public void enterFirstName(String firstName) {
+        firstNameField.sendKeys(firstName);
+    }
+
+    public void enterLastName(String lastName) {
+        lastNameField.sendKeys(lastName);
     }
 
     public void enterAddress(String address) {
@@ -44,12 +54,38 @@ public class CheckoutPage {
         zipCodeField.sendKeys("00-001");
     }
 
-    public void clickPlaceOrder() {
+    public void clickContinue() {
         continueButton.click();
-        // Scroll to the FINISH button using UiScrollable to ensure it's visible before clicking
-        driver.findElement(AppiumBy.androidUIAutomator(
-                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView("
-                        + "new UiSelector().description(\"test-FINISH\"));"));
+    }
+
+    public boolean isFinishButtonDisplayed() {
+        return finishButton.isDisplayed();
+    }
+
+    public boolean isOverviewPageDisplayed() {
+        return overviewHeader.isDisplayed();
+    }
+
+    public String getProductTitle() {
+        return productTitle.getText();
+    }
+
+    public String getPaymentInfo() {
+        return paymentInfo.getText();
+    }
+
+    public String getShippingInfo() {
+        return shippingInfo.getText();
+    }
+
+    public String getTotalPrice() {
+        return totalPrice.getText();
+    }
+
+    public void clickPlaceOrder() {
+        clickContinue();
+        // Scroll to the FINISH button using generic helper to ensure it's visible before clicking
+        scrollToElement("test-FINISH");
         finishButton.click();
     }
 }

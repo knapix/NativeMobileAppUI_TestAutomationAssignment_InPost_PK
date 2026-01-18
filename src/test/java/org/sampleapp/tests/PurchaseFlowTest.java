@@ -30,7 +30,8 @@ public class PurchaseFlowTest extends TestBase {
         cartPage.clickCheckoutButton();
 
         // Step 4: Fill in shipping details and place the order
-        checkoutPage.enterName("Jan Kowalski");
+        checkoutPage.enterFirstName("Jan");
+        checkoutPage.enterLastName("Kowalski");
         checkoutPage.enterAddress("ul. Przykładowa 1, 00-001 Warszawa");
         checkoutPage.clickPlaceOrder();
 
