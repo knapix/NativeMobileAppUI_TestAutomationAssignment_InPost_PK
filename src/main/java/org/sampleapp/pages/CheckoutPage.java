@@ -21,7 +21,7 @@ public class CheckoutPage extends BasePage {
     @AndroidFindBy(accessibility = "test-FINISH")
     private WebElement finishButton;
 
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Description']/android.widget.TextView[@text='CHECKOUT: OVERVIEW'] | //android.widget.TextView[@text='CHECKOUT: OVERVIEW']")
+    @AndroidFindBy(accessibility = "test-CHECKOUT: OVERVIEW")
     private WebElement overviewHeader;
 
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Item']//android.view.ViewGroup[@content-desc='test-Description']/android.widget.TextView")
