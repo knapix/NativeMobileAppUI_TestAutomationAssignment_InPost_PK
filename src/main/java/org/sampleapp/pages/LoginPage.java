@@ -1,5 +1,6 @@
 package org.sampleapp.pages;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
@@ -17,13 +18,7 @@ public class LoginPage extends BasePage {
     }
 
     public void loginAsStandardUser() {
-        try {
-            // Check if we are already logged in (e.g. standardUserButton is not visible)
-            if (!standardUserButton.isDisplayed()) {
-                return;
-            }
-        } catch (Exception e) {
-            // If element is not found, we might already be logged in
+        if (driver.findElements(AppiumBy.accessibilityId("test-standard_user")).isEmpty()) {
             return;
         }
 

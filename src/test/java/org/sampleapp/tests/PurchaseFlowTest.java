@@ -32,8 +32,9 @@ public class PurchaseFlowTest extends TestBase {
         // Step 4: Fill in shipping details and place the order
         checkoutPage.enterFirstName("Jan");
         checkoutPage.enterLastName("Kowalski");
-        checkoutPage.enterAddress("ul. Przykładowa 1, 00-001 Warszawa");
-        checkoutPage.clickPlaceOrder();
+        checkoutPage.enterZipCode("00-001");
+        checkoutPage.clickContinue();
+        checkoutPage.clickFinish();
 
         // Step 5: Verify the order confirmation message
         String confirmationText = orderConfirmationPage.getConfirmationMessage().getText();

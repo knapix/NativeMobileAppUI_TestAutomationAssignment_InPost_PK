@@ -1,6 +1,5 @@
 package org.sampleapp.pages;
 
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
@@ -49,9 +48,8 @@ public class CheckoutPage extends BasePage {
         lastNameField.sendKeys(lastName);
     }
 
-    public void enterAddress(String address) {
-        // ZIP code is used here as a placeholder for the address info required by the app
-        zipCodeField.sendKeys("00-001");
+    public void enterZipCode(String zipCode) {
+        zipCodeField.sendKeys(zipCode);
     }
 
     public void clickContinue() {
@@ -82,8 +80,7 @@ public class CheckoutPage extends BasePage {
         return totalPrice.getText();
     }
 
-    public void clickPlaceOrder() {
-        clickContinue();
+    public void clickFinish() {
         // Scroll to the FINISH button using generic helper to ensure it's visible before clicking
         scrollToElement("test-FINISH");
         finishButton.click();
