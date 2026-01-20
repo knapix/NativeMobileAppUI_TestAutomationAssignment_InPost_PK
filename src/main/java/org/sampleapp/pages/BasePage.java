@@ -21,4 +21,20 @@ public abstract class BasePage {
                             + "new UiSelector().description(\"" + accessibilityId + "\"));"));
         }
     }
+
+    public void scrollToText(String text) {
+        if (driver instanceof AndroidDriver) {
+            driver.findElement(AppiumBy.androidUIAutomator(
+                    "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView("
+                            + "new UiSelector().text(\"" + text + "\"));"));
+        }
+    }
+
+    public void scrollToTextContains(String text) {
+        if (driver instanceof AndroidDriver) {
+            driver.findElement(AppiumBy.androidUIAutomator(
+                    "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView("
+                            + "new UiSelector().textContains(\"" + text + "\"));"));
+        }
+    }
 }

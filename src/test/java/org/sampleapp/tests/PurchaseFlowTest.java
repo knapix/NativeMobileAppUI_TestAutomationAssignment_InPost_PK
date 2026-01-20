@@ -20,7 +20,7 @@ public class PurchaseFlowTest extends TestBase {
                 .clickContinue()
                 .clickFinish();
 
-        // Step 5: Verify the order confirmation message
+        // Verify the order confirmation by Back Home button
         Assert.assertTrue(orderConfirmationPage.isOrderConfirmed(), "Order confirmation message should be displayed!");
         Assert.assertTrue(orderConfirmationPage.isBackHomeButtonDisplayed(), "Back Home button should be displayed!");
     }

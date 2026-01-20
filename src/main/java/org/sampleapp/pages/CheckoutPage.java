@@ -27,13 +27,13 @@ public class CheckoutPage extends BasePage {
     @AndroidFindBy(accessibility = "test-Item")
     private WebElement productTitle;
 
-    @AndroidFindBy(accessibility = "test-Payment Information")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Payment Information:\")")
     private WebElement paymentInfo;
 
-    @AndroidFindBy(accessibility = "test-Shipping Information")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Shipping Information:\")")
     private WebElement shippingInfo;
 
-    @AndroidFindBy(accessibility = "test-Price")
+    @AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"Total:\")")
     private WebElement totalPrice;
 
     public CheckoutPage(AppiumDriver driver) {
@@ -69,19 +69,39 @@ public class CheckoutPage extends BasePage {
     }
 
     public boolean isProductTitleDisplayed() {
-        return productTitle.isDisplayed();
+        try {
+            scrollToElement("test-Item");
+            return productTitle.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public boolean isPaymentInfoDisplayed() {
-        return paymentInfo.isDisplayed();
+        try {
+            scrollToText("Payment Information:");
+            return paymentInfo.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public boolean isShippingInfoDisplayed() {
-        return shippingInfo.isDisplayed();
+        try {
+            scrollToText("Shipping Information:");
+            return shippingInfo.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public boolean isTotalPriceDisplayed() {
-        return totalPrice.isDisplayed();
+        try {
+            scrollToTextContains("Total:");
+            return totalPrice.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public OrderConfirmationPage clickFinish() {
