@@ -8,7 +8,6 @@ import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.remote.options.BaseOptions;
 
 import java.net.MalformedURLException;
-import java.net.URI;
 
 public class DriverFactory {
 

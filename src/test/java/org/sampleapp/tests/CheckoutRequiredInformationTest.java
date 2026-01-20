@@ -1,8 +1,6 @@
 package org.sampleapp.tests;
 
-import org.sampleapp.pages.CartPage;
 import org.sampleapp.pages.CheckoutPage;
-import org.sampleapp.pages.HomePage;
 import org.sampleapp.pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
