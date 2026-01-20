@@ -25,5 +25,6 @@ public class CheckoutOverviewTest extends TestBase {
         Assert.assertTrue(checkoutPage.isPaymentInfoDisplayed(), "Payment information should be displayed!");
         Assert.assertTrue(checkoutPage.isShippingInfoDisplayed(), "Shipping information should be displayed!");
         Assert.assertTrue(checkoutPage.isTotalPriceDisplayed(), "Total price should be displayed!");
+        Assert.assertTrue(checkoutPage.isFinishButtonDisplayed(), "Finish button should be displayed!");
     }
 }

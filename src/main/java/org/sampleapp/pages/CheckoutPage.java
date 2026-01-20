@@ -61,6 +61,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public boolean isFinishButtonDisplayed() {
+        scrollToElement("test-FINISH");
         return finishButton.isDisplayed();
     }
 
