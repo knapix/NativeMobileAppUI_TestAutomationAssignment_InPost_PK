@@ -5,14 +5,18 @@ import org.openqa.selenium.WebElement;
 
 public class OrderConfirmationPage extends BasePage {
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text, 'THANK YOU FOR YOU ORDER') or contains(@text, 'Thank you')]")
-    private WebElement confirmationMessage;
+    @AndroidFindBy(accessibility = "test-BACK HOME")
+    private WebElement backHomeButton;
 
     public OrderConfirmationPage(AppiumDriver driver) {
         super(driver);
     }
 
-    public WebElement getConfirmationMessage() {
-        return confirmationMessage;
+    public boolean isBackHomeButtonDisplayed() {
+        return backHomeButton.isDisplayed();
+    }
+
+    public boolean isOrderConfirmed() {
+        return isBackHomeButtonDisplayed();
     }
 }

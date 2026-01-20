@@ -19,12 +19,14 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    public void clickCartButton() {
+    public CartPage clickCartButton() {
         cartButton.click();
+        return new CartPage(driver);
     }
 
-    public void selectFirstProduct() {
+    public HomePage selectFirstProduct() {
         addToCartButton.click();
+        return this;
     }
 
     public boolean isRemoveButtonDisplayed() {

@@ -24,36 +24,40 @@ public class CheckoutPage extends BasePage {
     @AndroidFindBy(accessibility = "test-CHECKOUT: OVERVIEW")
     private WebElement overviewHeader;
 
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Item']//android.view.ViewGroup[@content-desc='test-Description']/android.widget.TextView")
+    @AndroidFindBy(accessibility = "test-Item")
     private WebElement productTitle;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text, 'Payment Information')]/following-sibling::android.widget.TextView[1] | //android.widget.TextView[contains(@text, 'PAYMENT INFORMATION')]/following-sibling::android.widget.TextView[1]")
+    @AndroidFindBy(accessibility = "test-Payment Information")
     private WebElement paymentInfo;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text, 'Shipping Information')]/following-sibling::android.widget.TextView[1] | //android.widget.TextView[contains(@text, 'SHIPPING INFORMATION')]/following-sibling::android.widget.TextView[1]")
+    @AndroidFindBy(accessibility = "test-Shipping Information")
     private WebElement shippingInfo;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text, 'Total:')]")
+    @AndroidFindBy(accessibility = "test-Price")
     private WebElement totalPrice;
 
     public CheckoutPage(AppiumDriver driver) {
         super(driver);
     }
 
-    public void enterFirstName(String firstName) {
+    public CheckoutPage enterFirstName(String firstName) {
         firstNameField.sendKeys(firstName);
+        return this;
     }
 
-    public void enterLastName(String lastName) {
+    public CheckoutPage enterLastName(String lastName) {
         lastNameField.sendKeys(lastName);
+        return this;
     }
 
-    public void enterZipCode(String zipCode) {
+    public CheckoutPage enterZipCode(String zipCode) {
         zipCodeField.sendKeys(zipCode);
+        return this;
     }
 
-    public void clickContinue() {
+    public CheckoutPage clickContinue() {
         continueButton.click();
+        return this;
     }
 
     public boolean isFinishButtonDisplayed() {
@@ -64,25 +68,26 @@ public class CheckoutPage extends BasePage {
         return overviewHeader.isDisplayed();
     }
 
-    public String getProductTitle() {
-        return productTitle.getText();
+    public boolean isProductTitleDisplayed() {
+        return productTitle.isDisplayed();
     }
 
-    public String getPaymentInfo() {
-        return paymentInfo.getText();
+    public boolean isPaymentInfoDisplayed() {
+        return paymentInfo.isDisplayed();
     }
 
-    public String getShippingInfo() {
-        return shippingInfo.getText();
+    public boolean isShippingInfoDisplayed() {
+        return shippingInfo.isDisplayed();
     }
 
-    public String getTotalPrice() {
-        return totalPrice.getText();
+    public boolean isTotalPriceDisplayed() {
+        return totalPrice.isDisplayed();
     }
 
-    public void clickFinish() {
+    public OrderConfirmationPage clickFinish() {
         // Scroll to the FINISH button using generic helper to ensure it's visible before clicking
         scrollToElement("test-FINISH");
         finishButton.click();
+        return new OrderConfirmationPage(driver);
     }
 }

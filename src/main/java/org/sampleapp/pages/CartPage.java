@@ -13,8 +13,9 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
-    public void clickCheckoutButton() {
+    public CheckoutPage clickCheckoutButton() {
         checkoutButton.click();
+        return new CheckoutPage(driver);
     }
 
     public boolean isCheckoutButtonDisplayed() {

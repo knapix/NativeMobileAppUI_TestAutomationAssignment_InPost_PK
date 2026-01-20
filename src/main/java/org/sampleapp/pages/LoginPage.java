@@ -17,9 +17,9 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void loginAsStandardUser() {
+    public HomePage loginAsStandardUser() {
         if (driver.findElements(AppiumBy.accessibilityId("test-standard_user")).isEmpty()) {
-            return;
+            return new HomePage(driver);
         }
 
         // Select the standard_user profile
@@ -27,5 +27,6 @@ public class LoginPage extends BasePage {
 
         // Perform login
         loginButton.click();
+        return new HomePage(driver);
     }
 }
