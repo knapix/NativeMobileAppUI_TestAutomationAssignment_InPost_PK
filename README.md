@@ -8,7 +8,8 @@ This project is a comprehensive test automation suite for the Sauce Labs Mobile 
 *   **Test Framework:** TestNG
 *   **Mobile Automation:** Appium (Java Client 8.6.0)
 *   **Build Tool:** Maven
-*   **Design Pattern:** Page Object Model (POM) with Abstract Base Page
+*   **Design Pattern:** Page Object Model (POM) with Fluent Interface
+*   **Logging:** Logback (SLF4J)
 
 ## Project Structure
 
@@ -17,9 +18,10 @@ This project is a comprehensive test automation suite for the Sauce Labs Mobile 
 ├── src/
 │   ├── main/
 │   │   ├── java/org/sampleapp/
+│   │   │   ├── helper/         # Helper classes (e.g., Product record)
 │   │   │   ├── pages/          # Page Objects (LoginPage, HomePage, etc.)
 │   │   │   └── utils/          # Utilities (ConfigLoader, DriverFactory)
-│   │   └── resources/          # Configuration files (android.properties, ios.properties)
+│   │   └── resources/          # Config (android.properties, ios.properties, logback.xml)
 │   └── test/
 │       └── java/org/sampleapp/
 │           └── tests/          # Test classes (PurchaseFlowTest, AddToCartTest, etc.)
@@ -79,7 +81,9 @@ mvn test -Dtest=PurchaseFlowTest
 
 ## Features
 
-*   **BasePage Architecture**: A common base class for all Page Objects that centralizes `AppiumFieldDecorator` initialization and provides shared utilities like `scrollToElement`.
-*   **Dynamic Driver Factory**: The `DriverFactory` handles the instantiation of `AndroidDriver` or `IOSDriver` based on runtime configuration.
-*   **Robust Locators**: Prioritizes `Accessibility IDs` for high-performance and stable element identification across platforms.
-*   **Environment Flexibility**: Supports both relative and absolute paths for the application binary.
+*   **Fluent Interface Design**: Page Objects implement a fluent API, allowing for method chaining and creating highly readable, expressive test scripts.
+*   **Automatic Scrolling**: The `BasePage` includes intelligent scrolling utilities (`scrollToElement`, `scrollToText`) that ensure elements are brought into view before interaction, handling long screens gracefully.
+*   **Enhanced Logging & Traceability**: Integrated Logback provides detailed, time-stamped logs of all actions, including page transitions, element interactions, and configuration loading, greatly simplifying debugging.
+*   **Dynamic Driver Factory**: The `DriverFactory` handles the instantiation of `AndroidDriver` or `IOSDriver` based on runtime configuration (system properties or property files).
+*   **Robust & Optimized Locators**: Uses a strategic mix of `Accessibility IDs` for speed and `UIAutomator` selectors for reliability when dynamic content is involved.
+*   **Environment Flexibility**: Supports both relative and absolute paths for the application binary, and allows easy configuration overrides via command-line arguments.
