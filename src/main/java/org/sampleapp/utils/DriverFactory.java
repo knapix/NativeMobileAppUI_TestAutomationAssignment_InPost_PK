@@ -6,10 +6,13 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.remote.options.BaseOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 
 public class DriverFactory {
+    private static final Logger logger = LoggerFactory.getLogger(DriverFactory.class);
 
     private static String getAppPath() {
         String appPath = ConfigLoader.getProperty("app.path");
@@ -23,7 +26,7 @@ public class DriverFactory {
                 return appPath;
             }
         }
-        
+
         // Assume relative to project root
         return System.getProperty("user.dir") + (appPath.startsWith("/") ? "" : "/") + appPath;
     }
@@ -31,9 +34,11 @@ public class DriverFactory {
     public static AppiumDriver createDriver() throws MalformedURLException {
         String platform = ConfigLoader.getProperty("platform", "android").toLowerCase();
         String appiumUrl = ConfigLoader.getProperty("appium.url");
+        logger.info("Creating Appium driver for platform: {} at URL: {}", platform, appiumUrl);
         java.net.URL url = java.net.URI.create(appiumUrl).toURL();
 
         if (platform.equals("android")) {
+            logger.info("Initializing AndroidDriver with UiAutomator2Options");
             UiAutomator2Options options = new UiAutomator2Options()
                     .setPlatformName(ConfigLoader.getProperty("platform.name"))
                     .setAutomationName(ConfigLoader.getProperty("automation.name"))
@@ -45,6 +50,7 @@ public class DriverFactory {
             setCommonOptions(options);
             return new AndroidDriver(url, options);
         } else if (platform.equals("ios")) {
+            logger.info("Initializing IOSDriver with XCUITestOptions");
             XCUITestOptions options = new XCUITestOptions()
                     .setPlatformName(ConfigLoader.getProperty("platform.name"))
                     .setAutomationName(ConfigLoader.getProperty("automation.name"))
@@ -55,6 +61,7 @@ public class DriverFactory {
             setCommonOptions(options);
             return new IOSDriver(url, options);
         } else {
+            logger.error("Unsupported platform: {}", platform);
             throw new RuntimeException("Unsupported platform: " + platform);
         }
     }

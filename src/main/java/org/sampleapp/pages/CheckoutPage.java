@@ -61,52 +61,32 @@ public class CheckoutPage extends BasePage {
     }
 
     public boolean isFinishButtonDisplayed() {
-        scrollToElement("test-FINISH");
-        return finishButton.isDisplayed();
+        return isDisplayed(finishButton, "test-FINISH");
     }
 
     public boolean isOverviewPageDisplayed() {
-        return overviewHeader.isDisplayed();
+        return isDisplayed(overviewHeader);
     }
 
     public boolean isProductTitleDisplayed() {
-        try {
-            scrollToElement("test-Item");
-            return productTitle.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+        return isDisplayed(productTitle, "test-Item");
     }
 
     public boolean isPaymentInfoDisplayed() {
-        try {
-            scrollToText("Payment Information:");
-            return paymentInfo.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+        return isDisplayedByText(paymentInfo, "Payment Information:");
     }
 
     public boolean isShippingInfoDisplayed() {
-        try {
-            scrollToText("Shipping Information:");
-            return shippingInfo.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+        return isDisplayedByText(shippingInfo, "Shipping Information:");
     }
 
     public boolean isTotalPriceDisplayed() {
-        try {
-            scrollToTextContains("Total:");
-            return totalPrice.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+        return isDisplayedByTextContains(totalPrice, "Total:");
     }
 
     public OrderConfirmationPage clickFinish() {
         // Scroll to the FINISH button using generic helper to ensure it's visible before clicking
+        logger.info("Clicking FINISH button");
         scrollToElement("test-FINISH");
         finishButton.click();
         return new OrderConfirmationPage(driver);

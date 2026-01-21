@@ -1,14 +1,15 @@
 package org.sampleapp.pages;
 
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class LoginPage extends BasePage {
 
     @AndroidFindBy(accessibility = "test-standard_user")
-    private WebElement standardUserButton;
+    private List<WebElement> standardUserButtons;
 
     @AndroidFindBy(accessibility = "test-LOGIN")
     private WebElement loginButton;
@@ -18,12 +19,14 @@ public class LoginPage extends BasePage {
     }
 
     public HomePage loginAsStandardUser() {
-        if (driver.findElements(AppiumBy.accessibilityId("test-standard_user")).isEmpty()) {
+        if (standardUserButtons.isEmpty()) {
+            logger.info("Login screen elements not found, assuming already logged in.");
             return new HomePage(driver);
         }
 
         // Select the standard_user profile
-        standardUserButton.click();
+        logger.info("Logging in as standard_user");
+        standardUserButtons.get(0).click();
 
         // Perform login
         loginButton.click();

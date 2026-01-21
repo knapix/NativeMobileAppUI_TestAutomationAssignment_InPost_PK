@@ -3,23 +3,41 @@ package org.sampleapp.tests;
 import org.sampleapp.pages.CartPage;
 import org.sampleapp.pages.HomePage;
 import org.sampleapp.pages.LoginPage;
-import org.testng.Assert;
+import static org.testng.Assert.assertTrue;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class AddToCartTest extends TestBase {
 
     @Test
     public void testAddProductToCart() {
         HomePage homePage = new LoginPage(driver)
-                .loginAsStandardUser()
-                .selectFirstProduct();
-        
-        // Assertion 1: Verify that 'REMOVE' button is displayed after adding to cart
-        Assert.assertTrue(homePage.isRemoveButtonDisplayed(), "Remove button should be displayed after adding product to cart!");
+                .loginAsStandardUser();
+
+        String expectedProductName = homePage.getFirstProductName();
+        logger.info("Product name from addFirstItemToCart: " + expectedProductName);
+
+        homePage.addFirstItemToCart();
+
+        // Verify that 'REMOVE' button is displayed after adding to cart
+        assertTrue(homePage.isRemoveButtonDisplayed(),
+                "Remove button should be displayed after adding product to cart!");
 
         CartPage cartPage = homePage.clickCartButton();
-        
-        // Assertion 2: Verify that we are on the cart page and checkout button is visible
-        Assert.assertTrue(cartPage.isCheckoutButtonDisplayed(), "Checkout button should be displayed on Cart page!");
+
+        // Ensure product is displayed in the cart before proceeding
+        assertTrue(cartPage.isProductNameDisplayed(),
+                "Product should be displayed in the cart!");
+
+        List<String> actualProductNames = cartPage.getCartProductNames();
+        logger.info("Product names in the cart: " + actualProductNames);
+
+        boolean isPresent = actualProductNames.contains(expectedProductName);
+        logger.info("Comparison (expected in actual): " + isPresent);
+
+        // Verify that added product name is visible in the cart
+        assertTrue(isPresent,
+                "Product name '" + expectedProductName + "' should be visible in the cart, but found: " + actualProductNames);
     }
 }
