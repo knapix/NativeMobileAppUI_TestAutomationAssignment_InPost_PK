@@ -44,34 +44,4 @@ public class ProductSortingTest extends TestBase {
 
     }
 
-//    @Test
-//    public void testSortProductsByPriceDescending() {
-//        HomePage home = new HomePage(driver)
-//                .sortProductsHighToLowPrice();
-//
-//
-//        List<Product> products = home.getFullyVisibleProducts();
-//
-//        System.out.println("=== ORDER CHECK ===");
-//        for (int i = 0; i < products.size(); i++) {
-//            System.out.println(i + ": " + products.get(i).name() + " -> " + products.get(i).price());
-//        }
-//
-//
-//        List<Double> prices = products.stream()
-//                .map(p -> p.price())
-//                .toList();
-//
-//        // Druk porównań kolejnych cen
-//        System.out.println("=== CHECK ORDER PRICES ===");
-//        for (int i = 0; i < prices.size() - 1; i++) {
-//            System.out.println("Compare " + prices.get(i) + " >= " + prices.get(i + 1) + " ? " +
-//                    (prices.get(i) >= prices.get(i + 1)));
-//        }
-//
-//        Assert.assertTrue(Ordering.natural().reverse().isOrdered(prices),
-//                "Products are NOT sorted in descending order");
-//
-//
-//    }
 }

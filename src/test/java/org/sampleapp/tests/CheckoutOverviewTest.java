@@ -11,7 +11,7 @@ public class CheckoutOverviewTest extends TestBase {
     public void testCheckoutOrderDetails() {
         CheckoutPage checkoutPage = new LoginPage(driver)
                 .loginAsStandardUser()
-                .selectFirstProduct()
+                .addFirstItemToCart()
                 .clickCartButton()
                 .clickCheckoutButton()
                 .enterFirstName("Jan")

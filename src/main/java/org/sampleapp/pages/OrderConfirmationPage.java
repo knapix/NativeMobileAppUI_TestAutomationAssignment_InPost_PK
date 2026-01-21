@@ -29,8 +29,4 @@ public class OrderConfirmationPage extends BasePage {
     public boolean isThankYouMessageDisplayed() {
         return thankYouMessage.isDisplayed();
     }
-
-//    public boolean isOrderConfirmed() {
-//        return isBackHomeButtonDisplayed();
-//    }
 }

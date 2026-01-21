@@ -11,7 +11,7 @@ public class PurchaseFlowTest extends TestBase {
     public void testPurchaseFlow() {
         OrderConfirmationPage orderConfirmationPage = new LoginPage(driver)
                 .loginAsStandardUser()
-                .selectFirstProduct()
+                .addFirstItemToCart()
                 .clickCartButton()
                 .clickCheckoutButton()
                 .enterFirstName("Jan")

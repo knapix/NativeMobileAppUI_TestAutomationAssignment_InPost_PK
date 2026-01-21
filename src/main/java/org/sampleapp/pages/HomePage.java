@@ -1,6 +1,5 @@
 package org.sampleapp.pages;
 
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
@@ -15,10 +14,10 @@ public class HomePage extends BasePage {
     private WebElement cartButton;
 
     @AndroidFindBy(accessibility = "test-ADD TO CART")
-    private WebElement addToCartButton;
+    private List<WebElement> addToCartButtons;
 
     @AndroidFindBy(accessibility = "test-REMOVE")
-    private WebElement removeButton;
+    private List<WebElement> removeButtons;
 
     @AndroidFindBy(accessibility = "test-Toggle")
     private WebElement productViewButton;
@@ -29,15 +28,12 @@ public class HomePage extends BasePage {
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Price (low to high)']")
     private WebElement selectSortByLowToHighPriceButton;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Price (high to low)']")
-    private WebElement selectSortByHighToLowPriceButton;
 
-
-    @AndroidFindBy(accessibility ="test-Item")
-    private List<WebElement> getItemContainers;
+    @AndroidFindBy(accessibility = "test-Item title")
+    private List<WebElement> itemTitles;
 
     @AndroidFindBy(accessibility ="test-Price")
-    private List<WebElement> getPriceContainers;
+    private List<WebElement> priceContainers;
 
     public HomePage(AppiumDriver driver) {
         super(driver);
@@ -46,21 +42,15 @@ public class HomePage extends BasePage {
     // ====== DATA ======
 
     public List<Product> getFullyVisibleProducts() {
-
-
-
         List<Product> products = new ArrayList<>();
 
-        int count = Math.min(getItemContainers.size(), getPriceContainers.size());
+        int count = Math.min(itemTitles.size(), priceContainers.size());
 
         for (int i = 0; i < count; i++) {
-
-            String name = getItemContainers.get(i)
-                    .findElement(AppiumBy.accessibilityId("test-Item title"))
-                    .getText();
+            String name = itemTitles.get(i).getText();
 
             double price = Double.parseDouble(
-                    getPriceContainers.get(i).getText().replace("$", "")
+                    priceContainers.get(i).getText().replace("$", "")
             );
 
             products.add(new Product(name, price));
@@ -69,60 +59,6 @@ public class HomePage extends BasePage {
         return products;
     }
 
-
-
-
-
-//    public List<Product> getVisibleProducts() {
-//        List<Product> products = new ArrayList<>();
-//        List<WebElement> containers = driver.findElements(
-//                AppiumBy.accessibilityId("test-Item")
-//        );
-//
-//        System.out.println("Found containers: " + containers.size());
-//
-//        for (int i = 0; i < containers.size(); i++) {
-//            WebElement container = containers.get(i);
-//
-//            String title = "NO TITLE";
-//            double price = -1;
-//
-//            try {
-//                title = container
-//                        .findElement(AppiumBy.accessibilityId("test-Item title"))
-//                        .getText();
-//            } catch (Exception e) {
-//                System.out.println("❌ No title for item " + i);
-//            }
-//
-//            try {
-//                String priceText = container
-//                        .findElement(AppiumBy.accessibilityId("test-Price"))
-//                        .getText();
-//                price = Double.parseDouble(priceText.replace("$", ""));
-//            } catch (Exception e) {
-//                System.out.println("❌ No price for item " + i);
-//            }
-//
-//            System.out.println(i + " -> " + title + " | " + price);
-//            products.add(new Product(title, price));
-//        }
-//
-//        return products;
-//    }
-
-
-    // ====== MODEL ======
-
-//    public static class Product {
-//        public final String name;
-//        public final double price;
-//
-//        public Product(String name, double price) {
-//            this.name = name;
-//            this.price = price;
-//        }
-//    }
 
 
     public HomePage changeProductsView() {
@@ -140,20 +76,9 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    public HomePage selectSortByHighToLowPrice() {
-        selectSortByHighToLowPriceButton.click();
-        return this;
-    }
-
     public HomePage sortProductsLowToHighPrice() {
         clickFilterButton();
         selectSortByLowToHighPrice();
-        return this;
-    }
-
-    public HomePage sortProductsHighToLowPrice() {
-        clickFilterButton();
-        selectSortByHighToLowPrice();
         return this;
     }
 
@@ -162,12 +87,22 @@ public class HomePage extends BasePage {
         return new CartPage(driver);
     }
 
-    public HomePage selectFirstProduct() {
-        addToCartButton.click();
+    public HomePage addFirstItemToCart() {
+        if (!addToCartButtons.isEmpty()) {
+            addToCartButtons.get(0).click();
+        }
         return this;
     }
 
+    public String getFirstProductName() {
+        if (itemTitles.isEmpty()) {
+            throw new IllegalStateException("No products available");
+        }
+
+        return itemTitles.get(0).getText();
+    }
+
     public boolean isRemoveButtonDisplayed() {
-        return removeButton.isDisplayed();
+        return !removeButtons.isEmpty() && removeButtons.get(0).isDisplayed();
     }
 }

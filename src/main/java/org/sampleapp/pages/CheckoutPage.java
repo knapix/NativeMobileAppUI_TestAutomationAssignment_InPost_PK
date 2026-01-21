@@ -61,8 +61,12 @@ public class CheckoutPage extends BasePage {
     }
 
     public boolean isFinishButtonDisplayed() {
-        scrollToElement("test-FINISH");
-        return finishButton.isDisplayed();
+        try {
+            scrollToElement("test-FINISH");
+            return finishButton.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public boolean isOverviewPageDisplayed() {
