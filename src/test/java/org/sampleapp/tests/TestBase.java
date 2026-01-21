@@ -1,32 +1,24 @@
 package org.sampleapp.tests;
 
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.options.UiAutomator2Options;
+import io.appium.java_client.AppiumDriver;
+import org.sampleapp.utils.ConfigLoader;
+import org.sampleapp.utils.DriverFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.time.Duration;
 
 public class TestBase {
 
-    protected AndroidDriver driver;
+    protected AppiumDriver driver;
 
     @BeforeClass
     public void setUp() throws MalformedURLException {
-        UiAutomator2Options options = new UiAutomator2Options()
-                .setPlatformName("Android")
-                // Specific device name can be set if multiple devices are connected
-                //.setDeviceName("Medium_Phone_API_36.1")
-                .setAutomationName("UiAutomator2")
-                .setApp(System.getProperty("user.dir") + "/app/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk")
-                .setAppPackage("com.swaglabsmobileapp")
-                .setAppActivity("com.swaglabsmobileapp.MainActivity")
-                .setFullReset(false);
+        int implicitWait = ConfigLoader.getIntProperty("implicit.wait");
+        driver = DriverFactory.createDriver();
 
-        driver = new AndroidDriver(URI.create("http://127.0.0.1:4723").toURL(), options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
     }
 
     @AfterClass

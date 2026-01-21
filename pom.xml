@@ -39,12 +39,6 @@
                 <version>4.12.1</version>
             </dependency>
 
-            <!-- Dotenv (optional to manage config) -->
-            <dependency>
-                <groupId>io.github.cdimascio</groupId>
-                <artifactId>java-dotenv</artifactId>
-                <version>5.2.2</version>
-            </dependency>
 
         <!-- slf4j -->
         <dependency>

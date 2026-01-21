@@ -1,12 +1,10 @@
 package org.sampleapp.pages;
 
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
-public class HomePage {
+public class HomePage extends BasePage {
 
     @AndroidFindBy(accessibility = "test-Cart")
     private WebElement cartButton;
@@ -14,15 +12,24 @@ public class HomePage {
     @AndroidFindBy(accessibility = "test-ADD TO CART")
     private WebElement addToCartButton;
 
-    public HomePage(AndroidDriver driver) {
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    @AndroidFindBy(accessibility = "test-REMOVE")
+    private WebElement removeButton;
+
+    public HomePage(AppiumDriver driver) {
+        super(driver);
     }
 
-    public void clickCartButton() {
+    public CartPage clickCartButton() {
         cartButton.click();
+        return new CartPage(driver);
     }
 
-    public void selectFirstProduct() {
+    public HomePage selectFirstProduct() {
         addToCartButton.click();
+        return this;
+    }
+
+    public boolean isRemoveButtonDisplayed() {
+        return removeButton.isDisplayed();
     }
 }
