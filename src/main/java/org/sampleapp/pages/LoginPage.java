@@ -28,5 +28,6 @@ public class LoginPage extends BasePage {
         // Perform login
         loginButton.click();
         return new HomePage(driver);
+
     }
 }

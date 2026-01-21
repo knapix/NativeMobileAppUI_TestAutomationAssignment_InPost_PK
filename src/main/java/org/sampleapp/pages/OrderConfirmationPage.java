@@ -8,6 +8,12 @@ public class OrderConfirmationPage extends BasePage {
     @AndroidFindBy(accessibility = "test-BACK HOME")
     private WebElement backHomeButton;
 
+    @AndroidFindBy(accessibility = "test-CHECKOUT: COMPLETE!")
+    private WebElement checkoutComplete;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"THANK YOU FOR YOU ORDER\"]")
+    private WebElement thankYouMessage;
+
     public OrderConfirmationPage(AppiumDriver driver) {
         super(driver);
     }
@@ -16,7 +22,15 @@ public class OrderConfirmationPage extends BasePage {
         return backHomeButton.isDisplayed();
     }
 
-    public boolean isOrderConfirmed() {
-        return isBackHomeButtonDisplayed();
+    public boolean isCheckoutCompleteDisplayed() {
+        return checkoutComplete.isDisplayed();
     }
+
+    public boolean isThankYouMessageDisplayed() {
+        return thankYouMessage.isDisplayed();
+    }
+
+//    public boolean isOrderConfirmed() {
+//        return isBackHomeButtonDisplayed();
+//    }
 }

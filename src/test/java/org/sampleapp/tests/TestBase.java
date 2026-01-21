@@ -3,6 +3,8 @@ package org.sampleapp.tests;
 import io.appium.java_client.AppiumDriver;
 import org.sampleapp.utils.ConfigLoader;
 import org.sampleapp.utils.DriverFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -12,6 +14,8 @@ import java.time.Duration;
 public class TestBase {
 
     protected AppiumDriver driver;
+    static final Logger logger = LoggerFactory.getLogger(TestBase.class);
+
 
     @BeforeClass
     public void setUp() throws MalformedURLException {
