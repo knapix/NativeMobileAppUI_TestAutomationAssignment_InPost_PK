@@ -14,7 +14,7 @@ import java.time.Duration;
 public class TestBase {
 
     protected AppiumDriver driver;
-    static final Logger logger = LoggerFactory.getLogger(TestBase.class);
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     @BeforeClass
     public void setUp() throws MalformedURLException {
@@ -27,6 +27,7 @@ public class TestBase {
     @AfterClass
     public void tearDown() {
         if (driver != null) {
+            logger.info("Quitting Appium driver");
             driver.quit();
         }
     }

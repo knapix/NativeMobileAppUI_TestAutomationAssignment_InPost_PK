@@ -19,10 +19,12 @@ public class LoginPage extends BasePage {
 
     public HomePage loginAsStandardUser() {
         if (driver.findElements(AppiumBy.accessibilityId("test-standard_user")).isEmpty()) {
+            logger.info("Login screen elements not found, assuming already logged in.");
             return new HomePage(driver);
         }
 
         // Select the standard_user profile
+        logger.info("Logging in as standard_user");
         standardUserButton.click();
 
         // Perform login

@@ -18,6 +18,7 @@ public class CartPage extends BasePage {
     }
 
     public CheckoutPage clickCheckoutButton() {
+        logger.info("Clicking CHECKOUT button");
         scrollToElement("test-CHECKOUT");
         checkoutButton.click();
         return new CheckoutPage(driver);

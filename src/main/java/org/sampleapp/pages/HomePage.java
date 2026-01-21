@@ -80,13 +80,17 @@ public class HomePage extends BasePage {
     }
 
     public CartPage clickCartButton() {
+        logger.info("Clicking cart button");
         cartButton.click();
         return new CartPage(driver);
     }
 
     public HomePage addFirstItemToCart() {
         if (!addToCartButtons.isEmpty()) {
+            logger.info("Adding first item to cart");
             addToCartButtons.get(0).click();
+        } else {
+            logger.warn("No ADD TO CART buttons found!");
         }
         return this;
     }

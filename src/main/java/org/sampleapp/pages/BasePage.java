@@ -5,9 +5,12 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class BasePage {
     protected AppiumDriver driver;
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     public BasePage(AppiumDriver driver) {
         this.driver = driver;
@@ -16,6 +19,7 @@ public abstract class BasePage {
 
     public void scrollToElement(String accessibilityId) {
         if (driver instanceof AndroidDriver) {
+            logger.info("Scrolling to element with accessibilityId: {}", accessibilityId);
             driver.findElement(AppiumBy.androidUIAutomator(
                     "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView("
                             + "new UiSelector().description(\"" + accessibilityId + "\"));"));
@@ -24,6 +28,7 @@ public abstract class BasePage {
 
     public void scrollToText(String text) {
         if (driver instanceof AndroidDriver) {
+            logger.info("Scrolling to text: {}", text);
             driver.findElement(AppiumBy.androidUIAutomator(
                     "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView("
                             + "new UiSelector().text(\"" + text + "\"));"));
@@ -32,6 +37,7 @@ public abstract class BasePage {
 
     public void scrollToTextContains(String text) {
         if (driver instanceof AndroidDriver) {
+            logger.info("Scrolling to text containing: {}", text);
             driver.findElement(AppiumBy.androidUIAutomator(
                     "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView("
                             + "new UiSelector().textContains(\"" + text + "\"));"));

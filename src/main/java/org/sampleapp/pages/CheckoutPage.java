@@ -111,6 +111,7 @@ public class CheckoutPage extends BasePage {
 
     public OrderConfirmationPage clickFinish() {
         // Scroll to the FINISH button using generic helper to ensure it's visible before clicking
+        logger.info("Clicking FINISH button");
         scrollToElement("test-FINISH");
         finishButton.click();
         return new OrderConfirmationPage(driver);
