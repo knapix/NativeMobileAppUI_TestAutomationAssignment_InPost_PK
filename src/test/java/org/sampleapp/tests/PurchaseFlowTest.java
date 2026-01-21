@@ -2,7 +2,7 @@ package org.sampleapp.tests;
 
 import org.sampleapp.pages.LoginPage;
 import org.sampleapp.pages.OrderConfirmationPage;
-import org.testng.Assert;
+import static org.testng.Assert.assertTrue;
 import org.testng.annotations.Test;
 
 public class PurchaseFlowTest extends TestBase {
@@ -20,8 +20,11 @@ public class PurchaseFlowTest extends TestBase {
                 .clickContinue()
                 .clickFinish();
 
-        Assert.assertTrue(orderConfirmationPage.isCheckoutCompleteDisplayed(), "Checkout Complete message should be displayed!");
-        Assert.assertTrue(orderConfirmationPage.isThankYouMessageDisplayed(), "Thank you message should be displayed!");
-        Assert.assertTrue(orderConfirmationPage.isBackHomeButtonDisplayed(), "Back Home button should be displayed!");
+        assertTrue(orderConfirmationPage.isCheckoutCompleteDisplayed(),
+                "Checkout Complete message should be displayed!");
+        assertTrue(orderConfirmationPage.isThankYouMessageDisplayed(),
+                "Thank you message should be displayed!");
+        assertTrue(orderConfirmationPage.isBackHomeButtonDisplayed(),
+                "Back Home button should be displayed!");
     }
 }

@@ -4,7 +4,7 @@ import com.google.common.collect.Ordering;
 import org.sampleapp.helper.Product;
 import org.sampleapp.pages.HomePage;
 import org.sampleapp.pages.LoginPage;
-import org.testng.Assert;
+import static org.testng.Assert.assertTrue;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -36,7 +36,7 @@ public class ProductSortingTest extends TestBase {
                     (prices.get(i) <= prices.get(i + 1)));
         }
 
-        Assert.assertTrue(Ordering.natural().isOrdered(prices),
+        assertTrue(Ordering.natural().isOrdered(prices),
                 "Products are NOT sorted in ascending order");
     }
 }
