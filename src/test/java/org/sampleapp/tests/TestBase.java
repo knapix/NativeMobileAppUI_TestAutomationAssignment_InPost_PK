@@ -16,7 +16,6 @@ public class TestBase {
     protected AppiumDriver driver;
     static final Logger logger = LoggerFactory.getLogger(TestBase.class);
 
-
     @BeforeClass
     public void setUp() throws MalformedURLException {
         int implicitWait = ConfigLoader.getIntProperty("implicit.wait");

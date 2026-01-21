@@ -7,7 +7,6 @@ import org.sampleapp.pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
 import java.util.List;
 
 public class ProductSortingTest extends TestBase {
@@ -19,14 +18,12 @@ public class ProductSortingTest extends TestBase {
                 .changeProductsView()
                 .sortProductsLowToHighPrice();
 
-
         List<Product> products = home.getFullyVisibleProducts();
 
         logger.info("=== ORDER CHECK ===");
         for (int i = 0; i < products.size(); i++) {
             logger.info(i + ": " + products.get(i).name() + " -> " + products.get(i).price());
         }
-
 
         List<Double> prices = products.stream()
                 .map(Product::price)
@@ -41,7 +38,5 @@ public class ProductSortingTest extends TestBase {
 
         Assert.assertTrue(Ordering.natural().isOrdered(prices),
                 "Products are NOT sorted in ascending order");
-
     }
-
 }

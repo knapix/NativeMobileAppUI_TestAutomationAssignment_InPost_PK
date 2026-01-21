@@ -17,34 +17,26 @@
     </properties>
 
     <dependencies>
-            <!-- Appium Java Client -->
-            <dependency>
-                <groupId>io.appium</groupId>
-                <artifactId>java-client</artifactId>
-                <version>8.6.0</version>
-            </dependency>
-
-            <!-- TestNG -->
-            <dependency>
-                <groupId>org.testng</groupId>
-                <artifactId>testng</artifactId>
-                <version>7.8.0</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- Selenium (Appium required) -->
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-java</artifactId>
-                <version>4.12.1</version>
-            </dependency>
-
-
-        <!-- slf4j -->
+        <!-- Appium Java Client -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>2.0.17</version> <!-- Use latest 2026 version -->
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>8.6.0</version>
+        </dependency>
+
+        <!-- TestNG -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.8.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Selenium (Appium required) -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.12.1</version>
         </dependency>
 
         <!-- Logback Implementation -->
@@ -53,9 +45,7 @@
             <artifactId>logback-classic</artifactId>
             <version>1.4.11</version>
         </dependency>
-
     </dependencies>
-
 
     <build>
         <plugins>
@@ -80,6 +70,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

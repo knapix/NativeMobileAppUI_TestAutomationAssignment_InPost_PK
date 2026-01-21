@@ -28,11 +28,10 @@ public class HomePage extends BasePage {
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Price (low to high)']")
     private WebElement selectSortByLowToHighPriceButton;
 
-
     @AndroidFindBy(accessibility = "test-Item title")
     private List<WebElement> itemTitles;
 
-    @AndroidFindBy(accessibility ="test-Price")
+    @AndroidFindBy(accessibility = "test-Price")
     private List<WebElement> priceContainers;
 
     public HomePage(AppiumDriver driver) {
@@ -58,8 +57,6 @@ public class HomePage extends BasePage {
 
         return products;
     }
-
-
 
     public HomePage changeProductsView() {
         productViewButton.click();

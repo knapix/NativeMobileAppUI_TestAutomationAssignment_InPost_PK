@@ -34,7 +34,7 @@ public class AddToCartTest extends TestBase {
         boolean isPresent = actualProductNames.contains(expectedProductName);
         logger.info("Comparison (expected in actual): " + isPresent);
 
-        // Verify that added product name and quantity are visible in the cart
+        // Verify that added product name is visible in the cart
         Assert.assertTrue(isPresent, "Product name '" + expectedProductName + "' should be visible in the cart, but found: " + actualProductNames);
     }
 }

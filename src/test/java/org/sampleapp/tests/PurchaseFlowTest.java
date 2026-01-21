@@ -20,7 +20,6 @@ public class PurchaseFlowTest extends TestBase {
                 .clickContinue()
                 .clickFinish();
 
-
         Assert.assertTrue(orderConfirmationPage.isCheckoutCompleteDisplayed(), "Checkout Complete message should be displayed!");
         Assert.assertTrue(orderConfirmationPage.isThankYouMessageDisplayed(), "Thank you message should be displayed!");
         Assert.assertTrue(orderConfirmationPage.isBackHomeButtonDisplayed(), "Back Home button should be displayed!");

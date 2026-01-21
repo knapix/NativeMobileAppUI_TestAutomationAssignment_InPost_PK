@@ -23,7 +23,7 @@ public class DriverFactory {
                 return appPath;
             }
         }
-        
+
         // Assume relative to project root
         return System.getProperty("user.dir") + (appPath.startsWith("/") ? "" : "/") + appPath;
     }
