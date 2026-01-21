@@ -19,14 +19,14 @@ public class OrderConfirmationPage extends BasePage {
     }
 
     public boolean isBackHomeButtonDisplayed() {
-        return backHomeButton.isDisplayed();
+        return isDisplayed(backHomeButton);
     }
 
     public boolean isCheckoutCompleteDisplayed() {
-        return checkoutComplete.isDisplayed();
+        return isDisplayed(checkoutComplete);
     }
 
     public boolean isThankYouMessageDisplayed() {
-        return thankYouMessage.isDisplayed();
+        return isDisplayed(thankYouMessage);
     }
 }

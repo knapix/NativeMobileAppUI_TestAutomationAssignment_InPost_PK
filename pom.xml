@@ -32,13 +32,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Selenium (Appium required) -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.12.1</version>
-        </dependency>
-
         <!-- Logback Implementation -->
         <dependency>
             <groupId>ch.qos.logback</groupId>

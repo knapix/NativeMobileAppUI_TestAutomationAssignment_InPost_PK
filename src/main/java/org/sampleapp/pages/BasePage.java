@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,47 @@ public abstract class BasePage {
             driver.findElement(AppiumBy.androidUIAutomator(
                     "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView("
                             + "new UiSelector().textContains(\"" + text + "\"));"));
+        }
+    }
+
+    protected boolean isDisplayed(WebElement element) {
+        try {
+            return element.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected boolean isDisplayed(WebElement element, String scrollToAccessibilityId) {
+        try {
+            if (scrollToAccessibilityId != null) {
+                scrollToElement(scrollToAccessibilityId);
+            }
+            return element.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected boolean isDisplayedByText(WebElement element, String text) {
+        try {
+            if (text != null) {
+                scrollToText(text);
+            }
+            return element.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected boolean isDisplayedByTextContains(WebElement element, String text) {
+        try {
+            if (text != null) {
+                scrollToTextContains(text);
+            }
+            return element.isDisplayed();
+        } catch (Exception e) {
+            return false;
         }
     }
 }

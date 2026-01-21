@@ -1,6 +1,5 @@
 package org.sampleapp.pages;
 
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +11,12 @@ public class CartPage extends BasePage {
 
     @AndroidFindBy(accessibility = "test-CHECKOUT")
     private WebElement checkoutButton;
+
+    @AndroidFindBy(accessibility = "test-Item")
+    private List<WebElement> cartItems;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@content-desc='test-Item title'] | //android.view.ViewGroup[@content-desc='test-Description']/android.widget.TextView")
+    private List<WebElement> cartProductTitles;
 
     public CartPage(AppiumDriver driver) {
         super(driver);
@@ -25,20 +30,12 @@ public class CartPage extends BasePage {
     }
 
     public boolean isProductNameDisplayed() {
-        try {
-            return !driver.findElements(AppiumBy.accessibilityId("test-Item")).isEmpty();
-        } catch (Exception e) {
-            return false;
-        }
+        return !cartItems.isEmpty();
     }
 
     public List<String> getCartProductNames() {
         List<String> names = new ArrayList<>();
-        // Combined XPath to find titles by accessibility ID OR by being inside test-Description
-        String combinedXPath = "//android.widget.TextView[@content-desc='test-Item title'] | " +
-                               "//android.view.ViewGroup[@content-desc='test-Description']/android.widget.TextView";
-        List<WebElement> titles = driver.findElements(AppiumBy.xpath(combinedXPath));
-        for (WebElement title : titles) {
+        for (WebElement title : cartProductTitles) {
             String text = title.getText();
             if (text != null && !text.isEmpty()) {
                 names.add(text);
